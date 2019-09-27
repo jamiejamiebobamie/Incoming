@@ -57,10 +57,10 @@ class Icon extends Component {
 
     moveToLocation(){
         if (this.state.destinationX !== this.state.x && this.state.destinationY !== this.state.y) {
-            let moveX = this.state.x + ((this.state.destinationX - this.state.x) / this.state.destinationX)/2
+            let moveX;
             let moveY;
 
-            if (this.props.controlsToggle){
+            if (this.props.controlsToggleY){
                 if (this.state.y + this.props.addToY > 0 && this.state.y + this.props.addToY < this.props.height) {
                     moveY = this.state.y + this.props.addToY
                 } else if (this.state.y + this.props.addToY < 0) {
@@ -80,6 +80,24 @@ class Icon extends Component {
                 }
             }
 
+            if (this.props.controlsToggleX){
+                if (this.state.x + this.props.addToX > 0 && this.state.x + this.props.addToX < this.props.width) {
+                    moveX = this.state.x + this.props.addToX
+                } else if (this.state.x + this.props.addToX < 0) {
+                    moveX = 0
+                } else {
+                    moveX = this.props.width
+                }
+            } else {
+                if (this.state.x + ((this.state.destinationX - this.state.x) / this.state.destinationX)/2 + this.props.addToX > 0
+                    && this.state.x + ((this.state.destinationX - this.state.x) / this.state.destinationX)/2 + this.props.addToX < this.props.width) {
+                    moveX = this.state.x + ((this.state.destinationX - this.state.x) / this.state.destinationX)/2 + this.props.addToX
+                } else if (this.state.x + ((this.state.destinationX - this.state.x) / this.state.destinationX)/2 + this.props.addToX < 0) {
+                    moveX = 0
+                } else {
+                    moveX = this.props.width
+                }
+            }
             this.setState({x:moveX, y:moveY})
         }
     }

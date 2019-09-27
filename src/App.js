@@ -23,6 +23,10 @@ class App extends Component {
                 toggleUp:false,
                 toggleDown:false,
                 addToY: 0,
+                toggleLeft:false,
+                toggleRight:false,
+                addToX: 0,
+
 
             }
 
@@ -142,6 +146,33 @@ toggleUpDown(){
         }
     }
 }
+
+
+toggleLeftRight(){
+    if (this.state.toggleLeft && this.state.toggleRight){
+
+    } else if (this.state.toggleLeft) {
+        let add = this.state.addToX - 3
+        if (add >= -3){
+            this.setState({addToX:add})
+        }
+    } else if (this.state.toggleRight) {
+        let add = this.state.addToX + 3
+        if (add <= 3){
+            this.setState({addToX:add})
+        }
+    } else {
+        if (this.state.addToX !== 0){
+            if (this.state.addToX > 0){
+                let goToZero = this.state.addToX - 1
+                this.setState({addToX:goToZero})
+            } else {
+                let goToZero = this.state.addToX + 1
+                this.setState({addToX:goToZero})
+            }
+        }
+    }
+}
 //
 //
 // toggleDown(){
@@ -175,6 +206,7 @@ render(){
     setTimeout(()=>{
         console.log(this.state.addToY)
         this.toggleUpDown()
+        this.toggleLeftRight()
     },400)
     //
     //
@@ -204,7 +236,10 @@ render(){
              toggleMethod = {this.toggle.bind(this)}
              removeAnimal={this.removeAnimal}
              addToY={this.state.addToY}
-             controlsToggle={this.state.toggleUp || this.state.toggleDown}
+             addToX={this.state.addToX}
+
+             controlsToggleY={this.state.toggleUp || this.state.toggleDown}
+             controlsToggleX={this.state.toggleLeft || this.state.toggleRight}
              />
           :
           < CreateAnimal
@@ -226,6 +261,40 @@ render(){
           onMouseDown={()=>{this.setState({toggleDown:true})}}
           onMouseUp={()=>{this.setState({toggleDown:false})}}
           >Down</button>
+
+
+          <button
+          style={{marginTop:0, marginLeft:-50}}
+          onMouseDown={()=>{this.setState({toggleLeft:true, toggleDown:true})}}
+          onMouseUp={()=>{this.setState({toggleLeft:false,toggleDown:false})}}
+          >UpLeft</button>
+          <button
+          style={{marginTop:-25, marginLeft:-50}}
+          onMouseDown={()=>{this.setState({toggleLeft:true})}}
+          onMouseUp={()=>{this.setState({toggleLeft:false})}}
+          >Left</button>
+          <button
+          style={{marginTop:-50, marginLeft:-50}}
+          onMouseDown={()=>{this.setState({toggleLeft:true, toggleUp:true})}}
+          onMouseUp={()=>{this.setState({toggleLeft:false,toggleUp:false})}}
+          >UpLeft</button>
+
+          <button
+            style={{marginTop:0, marginLeft:50}}
+          onMouseDown={()=>{this.setState({toggleRight:true, toggleDown:true})}}
+          onMouseUp={()=>{this.setState({toggleRight:false, toggleDown:false})}}
+          >DownRight</button>
+          <button
+            style={{marginTop:-25, marginLeft:50}}
+          onMouseDown={()=>{this.setState({toggleRight:true})}}
+          onMouseUp={()=>{this.setState({toggleRight:false})}}
+          >Right</button>
+          <button
+            style={{marginTop:-50, marginLeft:50}}
+          onMouseDown={()=>{this.setState({toggleRight:true, toggleUp:true})}}
+          onMouseUp={()=>{this.setState({toggleRight:false, toggleUp:false})}}
+          >UpRight</button>
+
           </div>
       </div>
     )

@@ -24,7 +24,7 @@ class Ecosystem extends Component {
     render(){
 
         const animals = this.state.zoo.map( (animal) => (
-            <Icon key={animal.id} id={animal.id} controlsToggle={this.props.controlsToggle} addToY={this.props.addToY} removeAnimal={this.props.removeAnimal} vertices={this.props.vertices} toggle={this.state.toggle} storeLocations={this.props.storeLocations} type={animal.type} size={animal.size} styleClass={animal.styleClass} x={animal.x} y={animal.y} color={animal.color} width={this.props.width} height={this.props.height} />
+            <Icon key={animal.id} id={animal.id} controlsToggleX={this.props.controlsToggleX} addToX={this.props.addToX}  controlsToggleY={this.props.controlsToggleY} addToY={this.props.addToY} removeAnimal={this.props.removeAnimal} vertices={this.props.vertices} toggle={this.state.toggle} storeLocations={this.props.storeLocations} type={animal.type} size={animal.size} styleClass={animal.styleClass} x={animal.x} y={animal.y} color={animal.color} width={this.props.width} height={this.props.height} />
         ))
 
     // {type: 'Angry', size: '100', styleClass: 'breatheFast', x: '200', y: '300', color: 'pink'},
