@@ -55,9 +55,15 @@ animation:  breathe ease-in-out 1s infinite;
 }
 
 .personButton{
+    position: absolute;
+    z-index: 10;
     color: transparent;
     background-color: transparent;
     border-color: transparent;
+}
+
+.crowdControl{
+    position: absolute;
 }
 
 /* @media only screen and (max-width:600px){

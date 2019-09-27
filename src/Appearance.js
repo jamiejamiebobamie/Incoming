@@ -22,7 +22,7 @@ import {Question} from 'styled-icons/octicons'
 // import {Mailchimp} from 'styled-icons/fa-brands'
 
 
-import {UserCircle, Run} from 'styled-icons/boxicons-regular'
+import {UserCircle, Run, Handicap} from 'styled-icons/boxicons-regular'
 
 import {Circle, LogInCircle} from 'styled-icons/boxicons-solid'
 
@@ -73,32 +73,34 @@ function Appearance(props){
                         size={props.size} />)
             break;
           case 'Male':
-            type = (<button
-                className='personButton'
-                      onClick={()=>props.removeAnimal(props.id)}
-                    >
-                    <Male
+            type = (<Male
                         className={props.styleClass}
                         style={{left:props.x,top:props.y}}
                         color={props.color}
                         size={props.size} />
-                        </button>
                     )
             break;
             case 'Female':
-              type = (<button
-                  className='personButton'
-                      onClick={()=>props.removeAnimal(props.id)}
-                      >
+              type = (
                     <Female
                           className={props.styleClass}
                           style={{left:props.x,top:props.y}}
                           color={props.color}
                           size={props.size} />
-                          </button>
 
                       )
               break;
+
+              case 'Handicap':
+                type = (
+                      <Handicap
+                            className={props.styleClass}
+                            style={{left:props.x,top:props.y}}
+                            color={props.color}
+                            size={props.size} />
+
+                        )
+                break;
       case 'AddCircle':
         type = (<AddCircle
                         className={props.styleClass}
@@ -113,6 +115,10 @@ function Appearance(props){
                         color={props.color}
                         size={props.size} />)
         break;
+        // <button
+        //     className='personButton'
+        //         onClick={()=>props.removeAnimal(props.id)}
+        //         >                          </button>
 
 
 

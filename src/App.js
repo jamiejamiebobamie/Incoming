@@ -17,7 +17,14 @@ class App extends Component {
                 height: 0,
                 toggle: true,
                 zoo: [],
-                holdingCage:undefined}
+                holdingCage:undefined,
+                locationX:0,
+                locationY:0,
+                toggleUp:false,
+                toggleDown:false,
+                addToY: 0,
+
+            }
 
         //https://stackoverflow.com/questions/36862334/get-viewport-window-height-in-reactjs
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -58,11 +65,19 @@ class App extends Component {
     // {type: 'Angry', size: '100', styleClass: 'breatheFast', x: '200', y: '300', color: 'pink'},
     create(x,y,color){
         let type = undefined
-        if (Math.random()>.5){
+        let randomFraction = Math.random()
+        if (randomFraction>.5){
             type = 'Male'
         } else {
             type = 'Female'
         }
+        // if (randomFraction>.66){
+        //     type = 'Male'
+        // } else if (randomFraction>.33) {
+        //     type = 'Female'
+        // } else {
+        //     type = 'Run'
+        // }
         this.setState({holdingCage: {type:type,id:Math.random(), x:x,y:y,color:color,size:40, styleClass:'breatheNormal'}, toggle: true})
     }
 
@@ -95,25 +110,82 @@ class App extends Component {
         }
     }
 
-render(){
-    const numOfPoints = 6
-    const radius = 400
-    let points = []
-
-    for (let i = 0; i < numOfPoints; i++){
-        const newVertex = this.drawPoint(radius, numOfPoints - i, numOfPoints)
-        points.push(newVertex)
+    _onMouseMove(e) {
+            this.setState({ locationX: (this.props.width/2-e.screenX), locationY: (this.props.height/2-e.screenY) });
     }
 
-    const vertices = points.map( (vertex)=>
-        <div className='vertices' style={{left:vertex.x+(this.state.width/2), top:vertex.y+(this.state.height/2)}}>hi</div>
-    )
+    // onMouseMove={this._onMouseMove.bind(this)}
 
-    setTimeout(()=>console.log(this.state.zoo.length),3000)
+toggleUpDown(){
+    if (this.state.toggleUp && this.state.toggleDown){
+
+    } else if (this.state.toggleUp) {
+        let add = this.state.addToY - 3
+        if (add >= -3){
+            this.setState({addToY:add})
+
+        }
+    } else if (this.state.toggleDown) {
+        let add = this.state.addToY + 3
+        if (add <= 3){
+            this.setState({addToY:add})
+        }
+    } else {
+        if (this.state.addToY !== 0){
+            if (this.state.addToY > 0){
+                let goToZero = this.state.addToY - 1
+                this.setState({addToY:goToZero})
+            } else {
+                let goToZero = this.state.addToY + 1
+                this.setState({addToY:goToZero})
+            }
+        }
+    }
+}
+//
+//
+// toggleDown(){
+//     if (this.state.toggleUp){
+//         let add = this.state.addToY - 1
+//         this.setState({addToY:add})
+//     } else {
+//         this.setState({addToY:0})
+//     }
+// }
+
+render(){
+    // const numOfPoints = 6
+    // const radius = 400
+    // let points = []
+    //
+    // for (let i = 0; i < numOfPoints; i++){
+    //     const newVertex = this.drawPoint(radius, numOfPoints - i, numOfPoints)
+    //     points.push(newVertex)
+    // }
+    //
+    // const vertices = points.map( (vertex)=>
+    //     <div className='vertices' style={{left:vertex.x+(this.state.width/2), top:vertex.y+(this.state.height/2)}}>hi</div>
+    // )
+    // {vertices}
+    // vertices={points}
+
+
+    // setTimeout(()=>console.log(this.state.zoo.length),3000)
+
+    setTimeout(()=>{
+        console.log(this.state.addToY)
+        this.toggleUpDown()
+    },400)
+    //
+    //
+    // setTimeout(()=>{
+    //     console.log(this.state.addToY)
+    //     this.toggleDown()
+    // },800)
+
 
     return (
       <div className="App">
-        {vertices}
         <button
             style={{left:this.state.width/2-177,top:this.state.height/2-176}}
             className="toggle"
@@ -130,8 +202,9 @@ render(){
              addToZoo={this.addToZoo}
              zoo={this.state.zoo}
              toggleMethod = {this.toggle.bind(this)}
-             vertices={points}
              removeAnimal={this.removeAnimal}
+             addToY={this.state.addToY}
+             controlsToggle={this.state.toggleUp || this.state.toggleDown}
              />
           :
           < CreateAnimal
@@ -140,6 +213,20 @@ render(){
               create={this.create}
           />
           }
+          <div
+          className="crowdControl"
+          style={{top:this.state.height-100,left:this.state.width-100}}
+          >
+          <button
+          style={{marginTop:-50}}
+          onMouseDown={()=>{this.setState({toggleUp:true})}}
+          onMouseUp={()=>{this.setState({toggleUp:false})}}
+          >Up</button>
+          <button
+          onMouseDown={()=>{this.setState({toggleDown:true})}}
+          onMouseUp={()=>{this.setState({toggleDown:false})}}
+          >Down</button>
+          </div>
       </div>
     )
 }

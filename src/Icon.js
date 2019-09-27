@@ -58,7 +58,28 @@ class Icon extends Component {
     moveToLocation(){
         if (this.state.destinationX !== this.state.x && this.state.destinationY !== this.state.y) {
             let moveX = this.state.x + ((this.state.destinationX - this.state.x) / this.state.destinationX)/2
-            let moveY = this.state.y + ((this.state.destinationY - this.state.y) / this.state.destinationY)/2
+            let moveY;
+
+            if (this.props.controlsToggle){
+                if (this.state.y + this.props.addToY > 0 && this.state.y + this.props.addToY < this.props.height) {
+                    moveY = this.state.y + this.props.addToY
+                } else if (this.state.y + this.props.addToY < 0) {
+                    moveY = 0
+                } else {
+                    moveY = this.props.height
+                }
+
+            } else {
+                if (this.state.y + ((this.state.destinationY - this.state.y) / this.state.destinationY)/2 + this.props.addToY > 0
+                    && this.state.y + ((this.state.destinationY - this.state.y) / this.state.destinationY)/2 + this.props.addToY < this.props.height) {
+                    moveY = this.state.y + ((this.state.destinationY - this.state.y) / this.state.destinationY)/2 + this.props.addToY
+                } else if (this.state.y + ((this.state.destinationY - this.state.y) / this.state.destinationY)/2 + this.props.addToY < 0) {
+                    moveY = 0
+                } else {
+                    moveY = this.props.height
+                }
+            }
+
             this.setState({x:moveX, y:moveY})
         }
     }
@@ -68,7 +89,7 @@ class Icon extends Component {
             () => this.setNewLocation(), 10000);
 
         setTimeout(
-            () => {this.moveToLocation()}, 20);
+            () => {this.moveToLocation()}, 200);
 
         // if(!this.props.toggle && this.state.doOnce){
         //     this.props.storeLocations({id:this.state.id, x: this.state.x, y: this.state.y})
@@ -76,7 +97,7 @@ class Icon extends Component {
         // }
 
         return (
-            < Appearance id={this.props.id} removeAnimal={this.props.removeAnimal} type={this.state.type} styleClass={this.state.styleClass} size={this.state.size} color={this.props.color} x={this.state.x} y={this.state.y} />
+            < Appearance id={this.props.id} addToY={this.props.addToY} removeAnimal={this.props.removeAnimal} type={this.state.type} styleClass={this.state.styleClass} size={this.state.size} color={this.props.color} x={this.state.x} y={this.state.y} />
         )
     }
 }
