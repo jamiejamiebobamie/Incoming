@@ -66,6 +66,71 @@ animation:  breathe ease-in-out 1s infinite;
     position: absolute;
 }
 
+.buttonControls{
+    width: 50px;
+    height: 50px;
+    border-radius: 70px;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(50px);
+    /* translateY(0); */
+  }
+  60% {
+    transform: translateY(10px);
+}
+  100% {
+    transform: translateY(50px);
+  }
+}
+
+.heroImageDiv{
+    position: absolute;
+    right: 15vw;
+    z-index: 1;
+
+}
+
+.heroTitleDiv{
+    position: absolute;
+    left: 9vw;
+    top: 100px;
+    z-index: 2;
+}
+
+.splashTitle{
+    transform: skewX(10deg);
+    font-size: 100px;
+    /* font-family: impact; */
+ font-family: 'Oswald', sans-serif;
+ /* color: white; */
+}
+
+.splashPlayButton{
+    position: absolute;
+    bottom: 20vh;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: thick;
+    background-color: transparent;
+    width: 200px;
+    height: 100px;
+    font-size: 50px;
+    font-family: 'Oswald', sans-serif;
+    z-index: 3;
+}
+
+.splashPlayButton:hover{
+    color: white;
+    border-color: white;
+    background-color: white;
+}
+
+.heroImage{
+    animation:  float ease-in-out 7s infinite alternate-reverse;
+}
+
 /* @media only screen and (max-width:600px){
 
     .toggle{

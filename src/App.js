@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Splash from './SplashScreen'
 
 import Ecosystem from './Ecosystem'
 import CreateAnimal from './CreateAnimal'
@@ -26,8 +27,6 @@ class App extends Component {
                 toggleLeft:false,
                 toggleRight:false,
                 addToX: 0,
-
-
             }
 
         //https://stackoverflow.com/questions/36862334/get-viewport-window-height-in-reactjs
@@ -218,84 +217,10 @@ render(){
 
     return (
       <div className="App">
-        <button
-            style={{left:this.state.width/2-177,top:this.state.height/2-176}}
-            className="toggle"
-            onClick={this.toggle}>
-            <Icon type='AddCircle' color='transparent'/>
-        </button>
-        {this.state.toggle ?
-           < Ecosystem
-             toggle={this.state.toggle}
-             storeLocations={this.storeLocations}
-             width={window.innerWidth-100}
-             height={window.innerHeight-100}
-             holdingCage = {this.state.holdingCage}
-             addToZoo={this.addToZoo}
-             zoo={this.state.zoo}
-             toggleMethod = {this.toggle.bind(this)}
-             removeAnimal={this.removeAnimal}
-             addToY={this.state.addToY}
-             addToX={this.state.addToX}
-
-             controlsToggleY={this.state.toggleUp || this.state.toggleDown}
-             controlsToggleX={this.state.toggleLeft || this.state.toggleRight}
-             />
-          :
-          < CreateAnimal
-              width={window.innerWidth}
-              height={window.innerHeight}
-              create={this.create}
-          />
-          }
-          <div
-          className="crowdControl"
-          style={{top:this.state.height-100,left:this.state.width-100}}
-          >
-          <button
-          style={{marginTop:-50}}
-          onMouseDown={()=>{this.setState({toggleUp:true})}}
-          onMouseUp={()=>{this.setState({toggleUp:false})}}
-          >Up</button>
-          <button
-          onMouseDown={()=>{this.setState({toggleDown:true})}}
-          onMouseUp={()=>{this.setState({toggleDown:false})}}
-          >Down</button>
-
-
-          <button
-          style={{marginTop:0, marginLeft:-50}}
-          onMouseDown={()=>{this.setState({toggleLeft:true, toggleDown:true})}}
-          onMouseUp={()=>{this.setState({toggleLeft:false,toggleDown:false})}}
-          >UpLeft</button>
-          <button
-          style={{marginTop:-25, marginLeft:-50}}
-          onMouseDown={()=>{this.setState({toggleLeft:true})}}
-          onMouseUp={()=>{this.setState({toggleLeft:false})}}
-          >Left</button>
-          <button
-          style={{marginTop:-50, marginLeft:-50}}
-          onMouseDown={()=>{this.setState({toggleLeft:true, toggleUp:true})}}
-          onMouseUp={()=>{this.setState({toggleLeft:false,toggleUp:false})}}
-          >UpLeft</button>
-
-          <button
-            style={{marginTop:0, marginLeft:50}}
-          onMouseDown={()=>{this.setState({toggleRight:true, toggleDown:true})}}
-          onMouseUp={()=>{this.setState({toggleRight:false, toggleDown:false})}}
-          >DownRight</button>
-          <button
-            style={{marginTop:-25, marginLeft:50}}
-          onMouseDown={()=>{this.setState({toggleRight:true})}}
-          onMouseUp={()=>{this.setState({toggleRight:false})}}
-          >Right</button>
-          <button
-            style={{marginTop:-50, marginLeft:50}}
-          onMouseDown={()=>{this.setState({toggleRight:true, toggleUp:true})}}
-          onMouseUp={()=>{this.setState({toggleRight:false, toggleUp:false})}}
-          >UpRight</button>
-
-          </div>
+        < Splash
+            width={this.state.width}
+            height={this.state.height}
+         />
       </div>
     )
 }
@@ -303,3 +228,91 @@ render(){
 }
 
 export default App;
+
+
+// <button
+//     style={{left:this.state.width/2-177,top:this.state.height/2-176}}
+//     className="toggle"
+//     onClick={this.toggle}>
+//     <Icon type='AddCircle' color='transparent'/>
+// </button>
+// {this.state.toggle ?
+//    < Ecosystem
+//      toggle={this.state.toggle}
+//      storeLocations={this.storeLocations}
+//      width={window.innerWidth-100}
+//      height={window.innerHeight-100}
+//      holdingCage = {this.state.holdingCage}
+//      addToZoo={this.addToZoo}
+//      zoo={this.state.zoo}
+//      toggleMethod = {this.toggle.bind(this)}
+//      removeAnimal={this.removeAnimal}
+//      addToY={this.state.addToY}
+//      addToX={this.state.addToX}
+//
+//      controlsToggleY={this.state.toggleUp || this.state.toggleDown}
+//      controlsToggleX={this.state.toggleLeft || this.state.toggleRight}
+//      />
+//   :
+//   < CreateAnimal
+//       width={window.innerWidth}
+//       height={window.innerHeight}
+//       create={this.create}
+//   />
+//   }
+//   <div
+//   className="crowdControl"
+//   style={{top:this.state.height-100,left:this.state.width/2}}
+//   >
+//   <button
+//   className='buttonControls'
+//   style={{marginTop:-100}}
+//   onMouseDown={()=>{this.setState({toggleUp:true})}}
+//   onMouseUp={()=>{this.setState({toggleUp:false})}}
+//   >Up</button>
+//   <button
+//   className='buttonControls'
+//   onMouseDown={()=>{this.setState({toggleDown:true})}}
+//   onMouseUp={()=>{this.setState({toggleDown:false})}}
+//   >Down</button>
+//
+//
+//   <button
+//   className='buttonControls'
+//   style={{marginTop:0, marginLeft:-50}}
+//   onMouseDown={()=>{this.setState({toggleLeft:true, toggleDown:true})}}
+//   onMouseUp={()=>{this.setState({toggleLeft:false,toggleDown:false})}}
+//   >DownLeft</button>
+//   <button
+//   className='buttonControls'
+//   style={{marginTop:-50, marginLeft:-50}}
+//   onMouseDown={()=>{this.setState({toggleLeft:true})}}
+//   onMouseUp={()=>{this.setState({toggleLeft:false})}}
+//   >Left</button>
+//   <button
+//   className='buttonControls'
+//   style={{marginTop:-100, marginLeft:-50}}
+//   onMouseDown={()=>{this.setState({toggleLeft:true, toggleUp:true})}}
+//   onMouseUp={()=>{this.setState({toggleLeft:false,toggleUp:false})}}
+//   >UpLeft</button>
+//
+//   <button
+//   className='buttonControls'
+//     style={{marginTop:0, marginLeft:50}}
+//   onMouseDown={()=>{this.setState({toggleRight:true, toggleDown:true})}}
+//   onMouseUp={()=>{this.setState({toggleRight:false, toggleDown:false})}}
+//   >DownRight</button>
+//   <button
+//   className='buttonControls'
+//     style={{marginTop:-50, marginLeft:50}}
+//   onMouseDown={()=>{this.setState({toggleRight:true})}}
+//   onMouseUp={()=>{this.setState({toggleRight:false})}}
+//   >Right</button>
+//   <button
+//   className='buttonControls'
+//     style={{marginTop:-100, marginLeft:50}}
+//   onMouseDown={()=>{this.setState({toggleRight:true, toggleUp:true})}}
+//   onMouseUp={()=>{this.setState({toggleRight:false, toggleUp:false})}}
+//   >UpRight</button>
+//
+//   </div>
