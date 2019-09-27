@@ -26,7 +26,10 @@ class App extends Component {
         this.storeLocations = this.storeLocations.bind(this);
         this.create = this.create.bind(this);
         this.addToZoo = this.addToZoo.bind(this)
+        this.removeAnimal = this.removeAnimal.bind(this)
+
     }
+
 
     componentDidMount() {
       this.updateWindowDimensions();
@@ -54,7 +57,13 @@ class App extends Component {
     }
     // {type: 'Angry', size: '100', styleClass: 'breatheFast', x: '200', y: '300', color: 'pink'},
     create(x,y,color){
-        this.setState({holdingCage: {type:data[Math.floor(Math.random() * data.length)].componentName,id:Math.random(), x:x,y:y,color:color,size:250*Math.random()+250*Math.random(), styleClass:'breatheNormal'}, toggle: true})
+        let type = undefined
+        if (Math.random()>.5){
+            type = 'Male'
+        } else {
+            type = 'Female'
+        }
+        this.setState({holdingCage: {type:type,id:Math.random(), x:x,y:y,color:color,size:40, styleClass:'breatheNormal'}, toggle: true})
     }
 
     addToZoo(){
@@ -70,12 +79,25 @@ class App extends Component {
         var angle = (theta * currentPoint+1);
         var x = (r * Math.cos(angle));
         var y = (r * Math.sin(angle));
-        return {x, y};
+        return {x:x, y:y};
+    }
+
+    removeAnimal(id){
+        for (let i =  0; i < this.state.zoo.length; i++){
+            console.log(this.state.zoo[i].id, id)
+            if (this.state.zoo[i].id === id){
+                let copyZoo = [...this.state.zoo]
+                let duplicateEnd = copyZoo[copyZoo.length-1]
+                copyZoo[i] = duplicateEnd
+                copyZoo.pop()
+                this.setState({zoo:copyZoo})
+            }
+        }
     }
 
 render(){
-    const numOfPoints = 16
-    const radius = 200
+    const numOfPoints = 6
+    const radius = 400
     let points = []
 
     for (let i = 0; i < numOfPoints; i++){
@@ -87,6 +109,8 @@ render(){
         <div className='vertices' style={{left:vertex.x+(this.state.width/2), top:vertex.y+(this.state.height/2)}}>hi</div>
     )
 
+    setTimeout(()=>console.log(this.state.zoo.length),3000)
+
     return (
       <div className="App">
         {vertices}
@@ -94,7 +118,7 @@ render(){
             style={{left:this.state.width/2-177,top:this.state.height/2-176}}
             className="toggle"
             onClick={this.toggle}>
-            <Icon type='Question' color='black'/>
+            <Icon type='AddCircle' color='transparent'/>
         </button>
         {this.state.toggle ?
            < Ecosystem
@@ -106,6 +130,8 @@ render(){
              addToZoo={this.addToZoo}
              zoo={this.state.zoo}
              toggleMethod = {this.toggle.bind(this)}
+             vertices={points}
+             removeAnimal={this.removeAnimal}
              />
           :
           < CreateAnimal

@@ -81,7 +81,7 @@ class CreateAnimal extends Component {
 
     _onMouseMove(e) {
         if (this.state.pickingColor){
-            this.setState({ locationX: e.screenX, locationY: e.screenY, color: this.getRGB((e.screenX/(this.props.width/255)), (e.screenY/(this.props.width/255))) });
+            this.setState({ locationX: (this.props.width/2-e.screenX), locationY: (this.props.height/2-e.screenY), color: this.getRGB((e.screenX/(this.props.width/255)), (e.screenY/(this.props.width/255))) });
         }
     }
 
@@ -113,9 +113,9 @@ class CreateAnimal extends Component {
                         {
                         this.state.pickingColor
                             ?
-                        <Icon type='Question' color={this.state.color} height={this.props.height/2} width={this.props.width/2}/>
+                        <Icon type='Circle' color={this.state.color} height={this.props.height/2} width={this.props.width/2}/>
                         :
-                        <Icon type='Question' color='white' height={this.props.height/2} width={this.props.width/2}/>
+                        <Icon type='Circle' color='white' height={this.props.height/2} width={this.props.width/2}/>
                         }
                     </button>
                     <h1 className="createAnimalText">

@@ -48,10 +48,16 @@ animation:  breathe ease-in-out 1s infinite;
     z-index: 5;
     width: 370px;
     height: 370px;
-    /* background-color: transparent; */
+    background-color: transparent;
     border-color: transparent;
     border-radius: 250px;
     /* animation:  breathe ease-in-out 3s infinite; */
+}
+
+.personButton{
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 /* @media only screen and (max-width:600px){
