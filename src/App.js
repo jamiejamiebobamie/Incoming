@@ -5,6 +5,7 @@ import Ecosystem from './Ecosystem'
 import CreateAnimal from './CreateAnimal'
 import Icon from './Icon'
 import './App.css';
+import throttle from 'lodash/throttle'
 
 import data from './iconEncyclo.js'
 
@@ -201,26 +202,34 @@ render(){
 
 
     // setTimeout(()=>console.log(this.state.zoo.length),3000)
-
+    //
+    //
     setTimeout(()=>{
-        console.log(this.state.addToY)
-        this.toggleUpDown()
-        this.toggleLeftRight()
-    },400)
-    //
-    //
-    // setTimeout(()=>{
+            this.toggleUpDown()
+            this.toggleLeftRight()
+    },800)
+
+    // throttle(() => {
     //     console.log(this.state.addToY)
-    //     this.toggleDown()
-    // },800)
+    //     this.toggleUpDown()
+    //     this.toggleLeftRight()
+    // }, 1000)
+
+    // const throttled = throttle(this.toggleUpDown,400)
+    //     console.log(this.state.addToY)
+    //     this.toggleUpDown()
+    //     this.toggleLeftRight()
+    // }, 1000)
 
 
     return (
       <div className="App">
-        < Splash
-            width={this.state.width}
-            height={this.state.height}
-         />
+
+      < Splash
+          width={this.state.width}
+          height={this.state.height}
+       />
+
       </div>
     )
 }
@@ -230,89 +239,91 @@ render(){
 export default App;
 
 
-// <button
-//     style={{left:this.state.width/2-177,top:this.state.height/2-176}}
-//     className="toggle"
-//     onClick={this.toggle}>
-//     <Icon type='AddCircle' color='transparent'/>
-// </button>
-// {this.state.toggle ?
-//    < Ecosystem
-//      toggle={this.state.toggle}
-//      storeLocations={this.storeLocations}
-//      width={window.innerWidth-100}
-//      height={window.innerHeight-100}
-//      holdingCage = {this.state.holdingCage}
-//      addToZoo={this.addToZoo}
-//      zoo={this.state.zoo}
-//      toggleMethod = {this.toggle.bind(this)}
-//      removeAnimal={this.removeAnimal}
-//      addToY={this.state.addToY}
-//      addToX={this.state.addToX}
-//
-//      controlsToggleY={this.state.toggleUp || this.state.toggleDown}
-//      controlsToggleX={this.state.toggleLeft || this.state.toggleRight}
-//      />
-//   :
-//   < CreateAnimal
-//       width={window.innerWidth}
-//       height={window.innerHeight}
-//       create={this.create}
-//   />
-//   }
-//   <div
-//   className="crowdControl"
-//   style={{top:this.state.height-100,left:this.state.width/2}}
-//   >
-//   <button
-//   className='buttonControls'
-//   style={{marginTop:-100}}
-//   onMouseDown={()=>{this.setState({toggleUp:true})}}
-//   onMouseUp={()=>{this.setState({toggleUp:false})}}
-//   >Up</button>
-//   <button
-//   className='buttonControls'
-//   onMouseDown={()=>{this.setState({toggleDown:true})}}
-//   onMouseUp={()=>{this.setState({toggleDown:false})}}
-//   >Down</button>
-//
-//
-//   <button
-//   className='buttonControls'
-//   style={{marginTop:0, marginLeft:-50}}
-//   onMouseDown={()=>{this.setState({toggleLeft:true, toggleDown:true})}}
-//   onMouseUp={()=>{this.setState({toggleLeft:false,toggleDown:false})}}
-//   >DownLeft</button>
-//   <button
-//   className='buttonControls'
-//   style={{marginTop:-50, marginLeft:-50}}
-//   onMouseDown={()=>{this.setState({toggleLeft:true})}}
-//   onMouseUp={()=>{this.setState({toggleLeft:false})}}
-//   >Left</button>
-//   <button
-//   className='buttonControls'
-//   style={{marginTop:-100, marginLeft:-50}}
-//   onMouseDown={()=>{this.setState({toggleLeft:true, toggleUp:true})}}
-//   onMouseUp={()=>{this.setState({toggleLeft:false,toggleUp:false})}}
-//   >UpLeft</button>
-//
-//   <button
-//   className='buttonControls'
-//     style={{marginTop:0, marginLeft:50}}
-//   onMouseDown={()=>{this.setState({toggleRight:true, toggleDown:true})}}
-//   onMouseUp={()=>{this.setState({toggleRight:false, toggleDown:false})}}
-//   >DownRight</button>
-//   <button
-//   className='buttonControls'
-//     style={{marginTop:-50, marginLeft:50}}
-//   onMouseDown={()=>{this.setState({toggleRight:true})}}
-//   onMouseUp={()=>{this.setState({toggleRight:false})}}
-//   >Right</button>
-//   <button
-//   className='buttonControls'
-//     style={{marginTop:-100, marginLeft:50}}
-//   onMouseDown={()=>{this.setState({toggleRight:true, toggleUp:true})}}
-//   onMouseUp={()=>{this.setState({toggleRight:false, toggleUp:false})}}
-//   >UpRight</button>
-//
-//   </div>
+      // 
+      // <button
+      //     style={{left:this.state.width/2-177,top:this.state.height/2-176}}
+      //     className="toggle"
+      //     onClick={this.toggle}>
+      //     <Icon type='AddCircle' color='transparent'/>
+      // </button>
+      // {this.state.toggle ?
+      //    < Ecosystem
+      //      toggle={this.state.toggle}
+      //      storeLocations={this.storeLocations}
+      //      width={window.innerWidth-100}
+      //      height={window.innerHeight-100}
+      //      holdingCage = {this.state.holdingCage}
+      //      addToZoo={this.addToZoo}
+      //      zoo={this.state.zoo}
+      //      toggleMethod = {this.toggle.bind(this)}
+      //      removeAnimal={this.removeAnimal}
+      //      addToY={this.state.addToY}
+      //      addToX={this.state.addToX}
+      //
+      //      controlsToggleY={this.state.toggleUp || this.state.toggleDown}
+      //      controlsToggleX={this.state.toggleLeft || this.state.toggleRight}
+      //      />
+      //   :
+      //   < CreateAnimal
+      //       width={window.innerWidth}
+      //       height={window.innerHeight}
+      //       create={this.create}
+      //   />
+      //   }
+      //   <div
+      //   className="crowdControl"
+      //   style={{top:this.state.height-100,left:this.state.width/2}}
+      //   >
+      //   <button
+      //   className='buttonControls'
+      //   style={{marginTop:-100}}
+      //   onMouseDown={()=>{this.setState({toggleUp:true})}}
+      //   onMouseUp={()=>{this.setState({toggleUp:false})}}
+      //   onKeyDown={()=>{this.setState({toggleUp:true})}}
+      //   >Up</button>
+      //   <button
+      //   className='buttonControls'
+      //   onMouseDown={()=>{this.setState({toggleDown:true})}}
+      //   onMouseUp={()=>{this.setState({toggleDown:false})}}
+      //   >Down</button>
+      //
+      //
+      //   <button
+      //   className='buttonControls'
+      //   style={{marginTop:0, marginLeft:-50}}
+      //   onMouseDown={()=>{this.setState({toggleLeft:true, toggleDown:true})}}
+      //   onMouseUp={()=>{this.setState({toggleLeft:false,toggleDown:false})}}
+      //   >DownLeft</button>
+      //   <button
+      //   className='buttonControls'
+      //   style={{marginTop:-50, marginLeft:-50}}
+      //   onMouseDown={()=>{this.setState({toggleLeft:true})}}
+      //   onMouseUp={()=>{this.setState({toggleLeft:false})}}
+      //   >Left</button>
+      //   <button
+      //   className='buttonControls'
+      //   style={{marginTop:-100, marginLeft:-50}}
+      //   onMouseDown={()=>{this.setState({toggleLeft:true, toggleUp:true})}}
+      //   onMouseUp={()=>{this.setState({toggleLeft:false,toggleUp:false})}}
+      //   >UpLeft</button>
+      //
+      //   <button
+      //   className='buttonControls'
+      //     style={{marginTop:0, marginLeft:50}}
+      //   onMouseDown={()=>{this.setState({toggleRight:true, toggleDown:true})}}
+      //   onMouseUp={()=>{this.setState({toggleRight:false, toggleDown:false})}}
+      //   >DownRight</button>
+      //   <button
+      //   className='buttonControls'
+      //     style={{marginTop:-50, marginLeft:50}}
+      //   onMouseDown={()=>{this.setState({toggleRight:true})}}
+      //   onMouseUp={()=>{this.setState({toggleRight:false})}}
+      //   >Right</button>
+      //   <button
+      //   className='buttonControls'
+      //     style={{marginTop:-100, marginLeft:50}}
+      //   onMouseDown={()=>{this.setState({toggleRight:true, toggleUp:true})}}
+      //   onMouseUp={()=>{this.setState({toggleRight:false, toggleUp:false})}}
+      //   >UpRight</button>
+      //
+      //   </div>

@@ -3,6 +3,9 @@ import React, {Component} from 'react'
 
 import Appearance from './Appearance'
 
+import throttle from 'lodash/throttle'
+
+
 
 
 class Icon extends Component {
@@ -48,6 +51,8 @@ class Icon extends Component {
             // }
 
             this.setState({destinationX:x, destinationY:y, doOnce: false})
+            // throttle(() => {
+            // this.setState({doOnce: true})}, 11000)
             setTimeout( () => {
                     this.setState({doOnce: true})
                 }, 11000);

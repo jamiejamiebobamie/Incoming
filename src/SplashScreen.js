@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-
+import SplashScreenHeroIcon from './SplashScreenHeroIcon'
+import SplashScreenCloudIcon from './SplashCloudIcon'
 
 
 class SplashScreen extends Component {
@@ -11,7 +12,13 @@ class SplashScreen extends Component {
             y:70,
             goUp: true,
             incrementColors: 0,
+            incrementOnce: true,
+            heroes:[],
+            clouds: [],
         }
+        this.removeHero = this.removeHero.bind(this)
+        this.removeCloud = this.removeCloud.bind(this)
+
     }
 
     getRGB(x,y) {
@@ -51,6 +58,68 @@ class SplashScreen extends Component {
         return newNumber
     }
 
+    removeHero(id){
+        for (let i =  0; i < this.state.heroes.length; i++){
+            // console.log(this.state.heroes[i].id, id)
+            if (this.state.heroes[i].id === id){
+                let copyHeroes = [...this.state.heroes]
+                let duplicateEnd = copyHeroes[copyHeroes.length-1]
+                copyHeroes[i] = duplicateEnd
+                copyHeroes.pop()
+                this.setState({heroes:copyHeroes})
+            }
+        }
+    }
+
+    // {type: 'Angry', size: '100', styleClass: 'breatheFast', x: '200', y: '300', color: 'pink'},
+    addHero(){
+        if (this.state.heroes.length < 10){
+            let type = undefined
+            let randomFraction = Math.random()
+            if (randomFraction>.5){
+                type = 'Male'
+            } else {
+                type = 'Female'
+            }
+            let x = Math.random() * 255
+            let y = Math.random() * 255
+
+            const newHero = { type:type, id:randomFraction, color: this.getRGB(x,y), size:40, styleClass:'breatheNormal'}
+            let copyHeroes = [...this.state.heroes, newHero]
+            this.setState({heroes: copyHeroes})
+        }
+    }
+
+
+    addCloud(){
+        if (this.state.clouds.length < 3){
+            let type = undefined
+            let randomFraction = Math.random()
+            if (randomFraction>.5){
+                type = 'Male'
+            } else {
+                type = 'Female'
+            }
+            const newCloud = { type:type, id:randomFraction, color: 'white', size:randomFraction*200+40, styleClass:'breatheNormal'}
+            let copyClouds = [...this.state.clouds, newCloud]
+            this.setState({clouds: copyClouds})
+        }
+    }
+
+    removeCloud(id){
+        for (let i =  0; i < this.state.clouds.length; i++){
+            // console.log(this.state.clouds[i].id, id)
+            if (this.state.clouds[i].id === id){
+                let copyClouds = [...this.state.clouds]
+                let duplicateEnd = copyClouds[copyClouds.length-1]
+                copyClouds[i] = duplicateEnd
+                copyClouds.pop()
+                this.setState({clouds:copyClouds})
+            }
+        }
+    }
+
+
     render(){
 
         // setTimeout(()=>{
@@ -74,16 +143,43 @@ class SplashScreen extends Component {
         //     if (x !== undefined && y !== undefined){
         //         this.setState({x:x, y:y})
         //     }
-        // }, 300)
+        // }, 1000)
         //
         // setTimeout(()=> {
-        //     let newIncrement = this.state.incrementColors + 1
-        //     if (newIncrement < 10){
-        //         this.setState({incrementColors: newIncrement})
+        //     if (this.state.incrementOnce){
+        //         let newIncrement = this.state.incrementColors + 1
+        //         if (newIncrement < 10){
+        //             this.setState({incrementColors: newIncrement})
+        //         } else {
+        //             this.setState({incrementColors: 0})
+        //         }
+        //         this.setState({incrementOnce:false})
         //     } else {
-        //         this.setState({incrementColors: 0})
+        //         setTimeout(()=>this.setState({incrementOnce:true}), 1000)
         //     }
-        // }, 1500)
+        // }, 1000)
+
+        setTimeout(()=> {
+                this.addHero()
+
+                console.log(this.state)
+            }, 1500)
+
+        const heroes = this.state.heroes.map((hero) =>
+            <SplashScreenHeroIcon
+                key={hero.id}
+                id={hero.id}
+                removeHero={this.removeHero}
+                type={hero.type}
+                size={hero.size}
+                styleClass={hero.styleClass}
+                x={hero.x}
+                y={hero.y}
+                color={hero.color}
+                width={this.props.width}
+                height={this.props.height} />
+    )
+
 
         return (
             <div className="Splash">
@@ -114,11 +210,39 @@ class SplashScreen extends Component {
                 color:this.getRGB(this.state.x/this.incrementColorOnLetters(4),this.state.y/this.incrementColorOnLetters(6)),
                 borderColor:this.getRGB(this.state.x/this.incrementColorOnLetters(4),this.state.y/this.incrementColorOnLetters(6))}}
             >Play</button>
+
+            {heroes}
+
+
             </div>
 
         )
     }
 }
+// 
+// this.addCloud()
+//
+//
+//     const clouds = this.state.clouds.map((cloud) =>
+//         <SplashScreenCloudIcon
+//             key={cloud.id}
+//             id={cloud.id}
+//             removeCloud={this.removeCloud}
+//             type={cloud.type}
+//             size={cloud.size}
+//             styleClass={cloud.styleClass}
+//             color={cloud.color}
+//             width={this.props.width}
+//             height={this.props.height} />
+//     )
+//
+//     {clouds}
+
+
+
+    //
+
+
 //
 // <h1 className="splashTitle">
 //   <span className="titleLetter1" style={{color:this.getRGB((1400/this.props.width)/255/1,this.props.height/500*255/9)}}>I</span>

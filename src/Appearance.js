@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styled from 'styled-components'
+// import styled from 'styled-components'
 
 // companies
 // import {Amazon} from 'styled-icons/boxicons-logos'
@@ -22,7 +22,7 @@ import {Question} from 'styled-icons/octicons'
 // import {Mailchimp} from 'styled-icons/fa-brands'
 
 
-import {UserCircle, Run, Handicap} from 'styled-icons/boxicons-regular'
+// import {UserCircle, Run, Handicap} from 'styled-icons/boxicons-regular'
 
 import {Circle, LogInCircle} from 'styled-icons/boxicons-solid'
 
@@ -37,20 +37,20 @@ function Appearance(props){
     switch(props.type) {
 
 
-        case 'UserCircle':
-          type = (<UserCircle
-                    className={props.styleClass}
-                    style={{left:props.x,top:props.y}}
-                    color={props.color}
-                    size={props.size} />)
-          break;
-          case 'Run':
-            type = (<Run
-                        className={props.styleClass}
-                        style={{left:props.x,top:props.y}}
-                        color={props.color}
-                        size={props.size}  />)
-            break;
+        // case 'UserCircle':
+        //   type = (<UserCircle
+        //             className={props.styleClass}
+        //             style={{left:props.x,top:props.y}}
+        //             color={props.color}
+        //             size={props.size} />)
+        //   break;
+        //   case 'Run':
+        //     type = (<Run
+        //                 className={props.styleClass}
+        //                 style={{left:props.x,top:props.y}}
+        //                 color={props.color}
+        //                 size={props.size}  />)
+        //     break;
           case 'Circle':
             type = (<Circle
                         className={props.styleClass}
@@ -90,17 +90,17 @@ function Appearance(props){
 
                       )
               break;
-
-              case 'Handicap':
-                type = (
-                      <Handicap
-                            className={props.styleClass}
-                            style={{left:props.x,top:props.y}}
-                            color={props.color}
-                            size={props.size} />
-
-                        )
-                break;
+              // 
+              // case 'Handicap':
+              //   type = (
+              //         <Handicap
+              //               className={props.styleClass}
+              //               style={{left:props.x,top:props.y}}
+              //               color={props.color}
+              //               size={props.size} />
+              //
+              //           )
+              //   break;
       case 'AddCircle':
         type = (<AddCircle
                         className={props.styleClass}
