@@ -89,8 +89,18 @@ animation:  breathe ease-in-out 1s infinite;
     position: absolute;
     right: 15vw;
     z-index: 1;
+    top:50px;
+
 
 }
+
+.splashDescription{
+    font-family: 'Oswald', sans-serif;
+    font-size: 30px;
+    margin-top: -80px;
+
+}
+
 
 .heroTitleDiv{
     position: absolute;
@@ -122,18 +132,26 @@ animation:  breathe ease-in-out 1s infinite;
 }
 
 .splashPlayButton:hover{
-    color: white;
-    border-color: white;
-    background-color: white;
+    background-color: rgb(236,234,64);
+    opacity: (.3);
 }
 
 .heroImage{
     animation:  float ease-in-out 7s infinite alternate-reverse;
 }
 
-/* @media only screen and (max-width:600px){
+@media only screen and (max-width:1000px){
+    .heroImageDiv{
+        top:220px;
+    }
+    .heroTitleDiv{
+        top: 10px;
+    }
+    .splashDescription{
+        color: transparent;
+    }
 
-    .toggle{
+/*     .toggle{
         left:17%;
     }
 } */
@@ -141,6 +159,7 @@ animation:  breathe ease-in-out 1s infinite;
 /* .toggle:hover{
     animation:  toggleHover linear 3s ;
 }
+
 
 
 @keyframes toggleHover {
@@ -152,8 +171,8 @@ animation:  breathe ease-in-out 1s infinite;
   }
   100% {
     transform: scale(2);
-  }
-} */
+  }*/
+}
 
 .vertices{
     position:absolute;

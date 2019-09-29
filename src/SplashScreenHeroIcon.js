@@ -16,7 +16,7 @@ class SplashScreenHeroIcon extends Component {
                    y: this.props.height,
 
                    color: this.props.color,
-                   id: this.props.id,
+                   id: props.id,
 
                    destinationX: Math.random()*this.props.width,
                    destinationY: -50,
@@ -26,12 +26,12 @@ class SplashScreenHeroIcon extends Component {
                 }
 
     moveToLocation(){
-        if (this.state.destinationX !== this.state.x && this.state.destinationY !== this.state.y) {
+        if (this.state.destinationY < this.state.y) {
             // setTimeout(()=>{
             //     this.setState({xVariation:Math.random()*3 - 2*Math.random()})
             // },3000)
             let moveX = this.state.x + ((this.state.destinationX - this.state.x) / this.state.destinationX)/2
-            let moveY = this.state.y - 3
+            let moveY = this.state.y - 2
             this.setState({x:moveX, y:moveY})
         } else {
             if (this.state.doOnce){
@@ -43,7 +43,7 @@ class SplashScreenHeroIcon extends Component {
 
     render(){
         setTimeout(
-            () => {this.moveToLocation()}, 200);
+            () => {this.moveToLocation()}, 100);
         return (
             < Appearance
                 id={this.props.id}

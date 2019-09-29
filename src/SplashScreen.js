@@ -8,8 +8,8 @@ class SplashScreen extends Component {
     constructor(props){
         super(props)
         this.state={
-            x:70,
-            y:70,
+            x:100,//this.props.width,
+            y:100,//this.props.height,
             goUp: true,
             incrementColors: 0,
             incrementOnce: true,
@@ -18,6 +18,22 @@ class SplashScreen extends Component {
         }
         this.removeHero = this.removeHero.bind(this)
         this.removeCloud = this.removeCloud.bind(this)
+
+        const letters = ['I','N','C','O','M','I','N','G','!']
+
+        this.title = letters.map((letter, i) =>
+            <span className="titleLetter1" style={{color:this.getRGB(170/i+1,170/letters.length)}}>{letter}</span>
+    )
+
+    // <span className="titleLetter1" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(1),this.state.y/this.incrementColorOnLetters(9))}}>I</span>
+    // <span className="titleLetter2" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(2),this.state.y/this.incrementColorOnLetters(8))}}>N</span>
+    // <span className="titleLetter3" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(3),this.state.y/this.incrementColorOnLetters(7))}}>C</span>
+    // <span className="titleLetter4" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(4),this.state.y/this.incrementColorOnLetters(6))}}>O</span>
+    // <span className="titleLetter5" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(5),this.state.y/this.incrementColorOnLetters(5))}}>M</span>
+    // <span className="titleLetter6" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(6),this.state.y/this.incrementColorOnLetters(4))}}>I</span>
+    // <span className="titleLetter7" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(7),this.state.y/this.incrementColorOnLetters(3))}}>N</span>
+    // <span className="titleLetter8" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(8),this.state.y/this.incrementColorOnLetters(2))}}>G</span>
+    // <span className="titleLetter9" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(9),this.state.y/this.incrementColorOnLetters(1))}}>!</span>
 
     }
 
@@ -74,17 +90,17 @@ class SplashScreen extends Component {
     // {type: 'Angry', size: '100', styleClass: 'breatheFast', x: '200', y: '300', color: 'pink'},
     addHero(){
         if (this.state.heroes.length < 10){
-            let type = undefined
+            let type = 'Female'
             let randomFraction = Math.random()
-            if (randomFraction>.5){
-                type = 'Male'
-            } else {
-                type = 'Female'
-            }
+            // if (randomFraction>.5){
+            //     type = 'Male'
+            // } else {
+            //     type = 'Female'
+            // }
             let x = Math.random() * 255
             let y = Math.random() * 255
 
-            const newHero = { type:type, id:randomFraction, color: this.getRGB(x,y), size:40, styleClass:'breatheNormal'}
+            const newHero = { type:type, id:randomFraction, color: this.getRGB(x,y), size:Math.random()*20+40, styleClass:'breatheNormal'}
             let copyHeroes = [...this.state.heroes, newHero]
             this.setState({heroes: copyHeroes})
         }
@@ -161,9 +177,7 @@ class SplashScreen extends Component {
 
         setTimeout(()=> {
                 this.addHero()
-
-                console.log(this.state)
-            }, 1500)
+            }, 2000)
 
         const heroes = this.state.heroes.map((hero) =>
             <SplashScreenHeroIcon
@@ -183,43 +197,34 @@ class SplashScreen extends Component {
 
         return (
             <div className="Splash">
+                <div className="heroTitleDiv">
+                    <h1 className="splashTitle">
+                        {this.title}
+                    </h1>
+                    <p className="splashDescription">A game about dodging hazards.</p>
+                </div>
 
-            <div className="heroTitleDiv">
+                <div className="heroImageDiv">
+                    <img className="heroImage" src='splashScreenImage.png' width='330' alt='' />
+                </div>
 
-            <h1 className="splashTitle">
-              <span className="titleLetter1" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(1),this.state.y/this.incrementColorOnLetters(9))}}>I</span>
-              <span className="titleLetter2" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(2),this.state.y/this.incrementColorOnLetters(8))}}>N</span>
-              <span className="titleLetter3" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(3),this.state.y/this.incrementColorOnLetters(7))}}>C</span>
-              <span className="titleLetter4" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(4),this.state.y/this.incrementColorOnLetters(6))}}>O</span>
-              <span className="titleLetter5" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(5),this.state.y/this.incrementColorOnLetters(5))}}>M</span>
-              <span className="titleLetter6" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(6),this.state.y/this.incrementColorOnLetters(4))}}>I</span>
-              <span className="titleLetter7" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(7),this.state.y/this.incrementColorOnLetters(3))}}>N</span>
-              <span className="titleLetter8" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(8),this.state.y/this.incrementColorOnLetters(2))}}>G</span>
-              <span className="titleLetter9" style={{color:this.getRGB(this.state.x/this.incrementColorOnLetters(9),this.state.y/this.incrementColorOnLetters(1))}}>!</span>
-            </h1>
-            </div>
+                <button
+                className="splashPlayButton"
+                onClick={this.props.togglePlay}
+                style={{
+                    left:this.props.width/2-100,
+                    color:this.getRGB(170/this.incrementColorOnLetters(9),170/this.incrementColorOnLetters(1)),
+                    borderColor:this.getRGB(170/this.incrementColorOnLetters(8),170/this.incrementColorOnLetters(2))}}
+                >Play</button>
 
-            <div className="heroImageDiv">
-                <img className="heroImage" src='splashScreenImage.png' width='330' alt='' />
-            </div>
-
-            <button
-            className="splashPlayButton"
-            style={{
-                left:this.props.width/2-100,
-                color:this.getRGB(this.state.x/this.incrementColorOnLetters(4),this.state.y/this.incrementColorOnLetters(6)),
-                borderColor:this.getRGB(this.state.x/this.incrementColorOnLetters(4),this.state.y/this.incrementColorOnLetters(6))}}
-            >Play</button>
-
-            {heroes}
-
+                {heroes}
 
             </div>
 
         )
     }
 }
-// 
+//
 // this.addCloud()
 //
 //
